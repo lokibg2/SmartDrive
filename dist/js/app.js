@@ -5,6 +5,20 @@ if (typeof jQuery === "undefined") {
 }
 
 
+
+$(function() {
+   $(".sidebar-menu li").click(function() {
+      // remove classes from all
+      $(".sidebar-menu li").removeClass("active");
+      // add class to the one we clicked
+      $(this).addClass("active");
+   });
+  $("#dashy").one("click", function(){
+
+  });  
+});
+
+
 var app = angular.module('SmartDrive',['ui.router']);
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
@@ -32,22 +46,15 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
     
 });
+
+
 app.controller('ReportCtrl', function($scope){
   var ctx = $("#myChart").get(0).getContext("2d");
+  var ctx2 = $("#myChart2").get(0).getContext("2d");
   
   var data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: ["13:00:00", "13:00:05", "13:00:10", "13:00:15", "13:00:20", "13:00:25", "13:00:30"],
     datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
-        },
         {
             label: "My Second dataset",
             fillColor: "rgba(151,187,205,0.2)",
@@ -60,7 +67,23 @@ app.controller('ReportCtrl', function($scope){
         }
     ]
 };
+var data2 = {
+    labels: ["13:00:00", "13:00:05", "13:00:10", "13:00:15", "13:00:20", "13:00:25", "13:00:30"],
+    datasets: [
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(151,0,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [20,25,30,19,24,36,21]
+        }
+    ]
+};
 var myLineChart = new Chart(ctx).Line(data);
+var myLineChart2 = new Chart(ctx2).Line(data2);
 });
 app.controller('MainCtrl', function($scope, $http){
   $scope.avgSpeed = 70;
@@ -184,8 +207,6 @@ app.controller('MainCtrl', function($scope, $http){
     }
 
 
-    google.charts.load('current', {'packages':['gauge']});
-    google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
 
       var data = google.visualization.arrayToDataTable([
