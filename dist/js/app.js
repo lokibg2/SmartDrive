@@ -30,17 +30,17 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider
     .state('main', {
       url: "/main",
-      templateUrl: "main.html",
+      templateUrl: "/SmartDrive/main.html",
       controller: "MainCtrl"
     })
     .state('profile', {
       url: "/profile",
-      templateUrl: "profile.html",
+      templateUrl: "/SmartDrive/profile.html",
       css: 'dist/css/temp.css'
     })
     .state('reports', {
       url: "/reports",
-      templateUrl: "rep.html",
+      templateUrl: "/SmartDrive/rep.html",
       controller: "ReportCtrl"
     })
 
